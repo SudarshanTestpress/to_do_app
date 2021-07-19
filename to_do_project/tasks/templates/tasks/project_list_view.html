@@ -4,7 +4,7 @@
     {% if projects %}
     {% for project in projects %}
         <div>
-            <a>{{project}}</a>
+            <a href="{% url 'tasks:list_task' project.id%}">{{project}}</a>
         </div>
     {% endfor %}
     {% endif %}

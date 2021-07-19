@@ -6,6 +6,7 @@ from . import views
 app_name = 'tasks'
 
 urlpatterns = [
-    path('projects/',views.ProjectList.as_view(), name = 'create_and_list_project'),
+    path('projects/',views.ProjectListView.as_view(), name = 'list_project'),
+    path('projects/<str:pk>',views.TaskListView.as_view(), name= 'list_task')
     
     ]
