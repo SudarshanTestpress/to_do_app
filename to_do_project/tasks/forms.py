@@ -9,7 +9,7 @@ class ProjectForm(ModelForm):
     class Meta:
         model = Project
         fields = '__all__'
-        
+
 
 class TaskForm(forms.ModelForm):
     text = forms.CharField(widget = forms.TextInput(attrs={'placeholder':'Add new task...'}))
@@ -17,4 +17,4 @@ class TaskForm(forms.ModelForm):
 
     class Meta:
         model = Task
-        fields = '__all__'
+        fields = ['text','tag','completed']
