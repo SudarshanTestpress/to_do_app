@@ -2,6 +2,11 @@
 <hr>
 <div><a href="{% url 'tasks:create_task' project.id %}">Create Task</a></div>
 <hr>
+<div><a href ="{% url 'tasks:list_overdue_tasks' project.id%}">
+    Show all overdue tasks in this project
+    </a>
+</div>
+<hr>
 <div>
     {% if tasks %}
     {% for task in tasks %}
@@ -11,5 +16,8 @@
         </div>
     {% endfor %}
     {% endif %}
-
+</div>
+<hr>
+<div>
+    <a href = "{% url 'tasks:list_project' %}">Back to projects</a>
 </div>
