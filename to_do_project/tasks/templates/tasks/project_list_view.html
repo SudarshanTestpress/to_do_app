@@ -1,5 +1,7 @@
 <div><h1>List of projects</h1></div>
 <hr>
+<div><a href="{% url 'tasks:create_project' %}">Create Project</a></div>
+<hr>
 <div>
     {% if projects %}
     {% for project in projects %}
