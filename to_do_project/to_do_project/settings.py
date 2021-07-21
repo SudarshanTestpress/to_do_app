@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'extra_views',
     'django_filters',
     'tasks',
+    'accounts'
 ]
 
 MIDDLEWARE = [
@@ -59,7 +60,7 @@ ROOT_URLCONF = 'to_do_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR/'templates'],
+        'DIRS': [BASE_DIR/'templates',],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -130,3 +131,15 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#Login URL
+LOGIN_URL = 'login'
+
+#Logout redirect view
+LOGOUT_REDIRECT_URL = 'login'
+
+#Login redirect view
+LOGIN_REDIRECT_URL = 'tasks:list_project'
+
+#for Email in developement
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
