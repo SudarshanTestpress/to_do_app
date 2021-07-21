@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'taggit',
     'extra_views',
+    'django_filters',
     'tasks',
 ]
 

@@ -1,4 +1,5 @@
 from django.db.models.base import Model
+from django.db.models.query import QuerySet
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls.base import reverse_lazy
 from datetime import datetime, timezone
@@ -6,8 +7,10 @@ from django.views.generic import ListView, UpdateView, DeleteView, CreateView, V
 from extra_views import ModelFormSetView
 from .models import Project, Task
 from django.views.generic.edit import FormMixin
-from .forms import ProjectForm, TaskForm, TaskCompleteForm
+from .forms import ProjectForm, TaskForm
 from django.urls import reverse
+from .filters import TaskFilter
+
 
 # Create your views here.
 
@@ -149,3 +152,12 @@ class AllTaskOverdueListView(ListView):
                 return False
         else:
             return False
+
+class TaskFilterView(ListView):
+    model = Task
+    template_name = 'tasks/tasks_filter_view.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter'] = TaskFilter(self.request.GET, queryset = self.get_queryset())
+        return context

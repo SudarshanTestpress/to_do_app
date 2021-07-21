@@ -6,6 +6,7 @@ app_name = 'tasks'
 
 urlpatterns = [
     path('',views.AllTaskOverdueListView.as_view(),name = 'all_overdue_tasks'),
+    path('taskssearch/',views.TaskFilterView.as_view(), name = 'task_search'),
     path('projects/',views.ProjectListView.as_view(), name = 'list_project'),
     path('projects/create',views.ProjectCreateView.as_view(), name = 'create_project'),
     path('projects/<str:pk>/updatename',views.ProjectUpdateView.as_view(), name = 'update_project'),
