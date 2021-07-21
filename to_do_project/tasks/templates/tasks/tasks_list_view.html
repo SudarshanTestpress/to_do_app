@@ -6,14 +6,24 @@
     Show all overdue tasks in this project
     </a>
 </div>
-<hr>
+
 <div>
     {% if tasks %}
     {% for task in tasks %}
+    <hr>
+    {% if task.completed %}
         <div>
             <a href="{% url 'tasks:update_task' project.id task.id %}">{{task}}</a>
             <span><a href="{% url 'tasks:delete_task' project.id task.id%}">delete</a></span>
+            Completed Task
         </div>
+    {% else %}
+    <div>
+        <a href="{% url 'tasks:update_task' project.id task.id %}">{{task}}</a>
+        <span><a href="{% url 'tasks:delete_task' project.id task.id%}">delete</a></span>
+        Uncompleted task
+    </div>
+    {% endif %}
     {% endfor %}
     {% endif %}
 </div>

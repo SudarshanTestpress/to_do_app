@@ -3,8 +3,10 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls.base import reverse_lazy
 from datetime import datetime, timezone
 from django.views.generic import ListView, UpdateView, DeleteView, CreateView, View
+from extra_views import ModelFormSetView
 from .models import Project, Task
-from .forms import ProjectForm, TaskForm
+from django.views.generic.edit import FormMixin
+from .forms import ProjectForm, TaskForm, TaskCompleteForm
 from django.urls import reverse
 
 # Create your views here.
@@ -49,8 +51,8 @@ class ProjectDeleteView(DeleteView):
 
 
 class TaskListView(ListView):
-    template_name = 'tasks/tasks_list_view.html'
     model = Task
+    template_name = 'tasks/tasks_list_view.html'
     context_object_name = 'tasks'
 
     def get_queryset(self):
