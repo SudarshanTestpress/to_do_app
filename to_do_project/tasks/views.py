@@ -63,7 +63,8 @@ class TaskListView(ListView):
     context_object_name = 'tasks'
 
     def get_queryset(self):
-        return Task.objects.filter(project = self.kwargs.get('pk'))
+        print(Task.objects.filter(project = self.kwargs.get('pk'),created_by = self.request.user))
+        return Task.objects.filter(project = self.kwargs.get('pk'),created_by = self.request.user)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -77,9 +78,13 @@ class TaskCreateView(View):
         self.project = get_object_or_404(Project, pk = pk)
         form = TaskForm(request.POST)
         if form.is_valid():
-            task = form.save(commit=False)
+            task = form.save(commit = False)
             task.project = self.project
-            task.save()
+            print(self.request.user,'user')
+            task.created_by = self.request.user
+            if task.assign_to == None:
+                task.assign_to = self.request.user
+                task.save()
             return redirect(reverse('tasks:list_task',kwargs={'pk':self.project.pk}))
         return render(request, 'tasks/create_task_view.html', {'form': form, 'project_pk':pk})
 
@@ -97,7 +102,8 @@ class TaskUpdateView(UpdateView):
     context_object_name = 'task'
 
     def form_valid(self, form):
-        task = form.save()
+        task = form.save(commit = False)
+        task.save()
         return redirect(reverse('tasks:list_task',kwargs={'pk': task.project.pk}))
 
 
