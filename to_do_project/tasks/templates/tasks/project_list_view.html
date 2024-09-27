@@ -1,0 +1,14 @@
+<div><h1>List of projects</h1></div>
+<hr>
+<div>
+    {% if projects %}
+    {% for project in projects %}
+        <div>
+            <a href="{% url 'tasks:list_task' project.id%}">{{project}}</a>
+            <span><a href="{% url 'tasks:update_project' project.id%}">update</a></span>
+            <span><a href="{% url 'tasks:delete_project' project.id%}">delete</a></span>
+        </div>
+    {% endfor %}
+    {% endif %}
+
+</div>
